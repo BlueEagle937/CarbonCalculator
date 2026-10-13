@@ -37,29 +37,29 @@
 </head>
 <body>
 
-    <!-- Requirement 8: container-fluid layout -->
+    <!-- Container Fluid Layout -->
     <div class="container-fluid py-4 px-4">
         
-        <!-- Requirement 1 & 2: Main Heading & Subheading -->
+        <!-- Main Heading & Subheading -->
         <div class="text-center mb-4">
-            <h1 class="display-5 fw-bold text-dark border d-inline-block px-4 py-2 bg-white shadow-sm">Carbon Footprint Calculator</h1>[cite: 2]
-            <h2 class="text-muted mt-2 fs-4">Climate change is real!!</h2>[cite: 2]
+            <h1 class="display-5 fw-bold text-dark border d-inline-block px-4 py-2 bg-white shadow-sm">Carbon Footprint Calculator</h1>
+            <h2 class="text-muted mt-2 fs-4">Climate change is real!!</h2>
         </div>
 
-        <!-- Requirement 3 & 4: Introduction Paragraph & Image -->
+        <!-- Introduction Paragraph & Image -->
         <div class="row align-items-center mb-5 px-md-5">
             <div class="col-md-6">
-                <p class="lead">Understanding your environmental impact is the first step toward building a sustainable future. Use our multi-step carbon calculator to track your daily energy consumption, travel habits, food choices, and shopping footprint to see how you can reduce emissions.</p>[cite: 2]
+                <p class="lead">Understanding your environmental impact is the first step toward building a sustainable future. Use our multi-step carbon calculator to track your daily energy consumption, travel habits, food choices, and shopping footprint to see how you can reduce emissions.</p>
             </div>
             <div class="col-md-6 text-center">
-                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80" alt="Environmental Sustainability" class="img-fluid rounded shadow" style="max-height: 250px;">[cite: 2]
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80" alt="Environmental Sustainability" class="img-fluid rounded shadow" style="max-height: 250px;">
             </div>
         </div>
 
-        <!-- Requirement 5 & 6: Secondary Heading & Supporting Paragraph -->
+        <!-- Secondary Heading & Supporting Paragraph -->
         <div class="text-center mb-4">
-            <h4>Ready to assess your carbon footprint? Fill out the form below to get started.</h4>[cite: 2]
-            <p class="text-secondary">Every small change makes a big difference for our planet.</p>[cite: 2]
+            <h4>Ready to assess your carbon footprint? Fill out the form below to get started.</h4>
+            <p class="text-secondary">Every small change makes a big difference for our planet.</p>
         </div>
 
         <!-- Navigation Tabs -->
@@ -170,11 +170,12 @@
                             </div>
                         </form>
                     </div>
-                    <!-- Card Footer with Dynamic Navigation & Requirement 7 Calculate Hyperlink Button -->
+                    <!-- Card Footer -->
                     <div class="card-footer bg-light d-flex justify-content-between py-3 align-items-center">
                         <button type="button" class="btn btn-secondary btn-sm px-4" id="prevBtn">Prev</button>
-                        <div id="actionButtonContainer">
+                        <div>
                             <button type="button" class="btn btn-success btn-sm px-4" id="nextBtn">Next</button>
+                            <a href="#" class="calculate-btn" id="calculateAction" style="display: none;">Calculate</a>
                         </div>
                     </div>
                 </div>
@@ -188,7 +189,8 @@
         const steps = document.querySelectorAll('.form-step');
         const navLinks = document.querySelectorAll('#calcTabs .nav-link');
         const prevBtn = document.getElementById('prevBtn');
-        const actionContainer = document.getElementById('actionButtonContainer');
+        const nextBtn = document.getElementById('nextBtn');
+        const calculateAction = document.getElementById('calculateAction');
         const headerTitle = document.getElementById('cardHeaderTitle');
         const stepTitles = ["General", "Home", "Travel", "Food", "Electronic usage", "Shopping", "Result"];
         
@@ -244,34 +246,30 @@
             headerTitle.textContent = `Fill the form below${stepIndex > 0 ? ' - ' + stepTitles[stepIndex] : ''}`;
             prevBtn.disabled = (stepIndex === 0);
 
-            // Requirement 7: On Shopping step (index 5), show blue Calculate hyperlink button instead of Next
-            if (stepIndex === 5) {
-                actionContainer.innerHTML = `<a href="#" class="calculate-btn" id="calculateAction">Calculate</a>`;[cite: 2]
-                document.getElementById('calculateAction').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    updateStep(6); // Go to Result
-                });
-            } else if (stepIndex === 6) {
-                actionContainer.innerHTML = ''; 
-            } else {
-                actionContainer.innerHTML = `<button type="button" class="btn btn-success btn-sm px-4" id="nextBtn">Next</button>`;
-                document.getElementById('nextBtn').addEventListener('click', () => {
-                    if (currentStep < steps.length - 1) {
-                        updateStep(currentStep + 1);
-                    }
-                });
+            // Toggle Next vs Calculate button based on step
+            if (stepIndex === 5) { // Shopping step
+                nextBtn.style.display = 'none';
+                calculateAction.style.display = 'inline-block';
+            } else if (stepIndex === 6) { // Result step
+                nextBtn.style.display = 'none';
+                calculateAction.style.display = 'none';
+            } else { // Steps 0 to 4
+                nextBtn.style.display = 'inline-block';
+                calculateAction.style.display = 'none';
             }
 
             currentStep = stepIndex;
         }
 
-        // Event delegation or direct binding for initial Next button
-        actionContainer.addEventListener('click', (e) => {
-            if (e.target && e.target.id === 'nextBtn') {
-                if (currentStep < steps.length - 1) {
-                    updateStep(currentStep + 1);
-                }
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                updateStep(currentStep + 1);
             }
+        });
+
+        calculateAction.addEventListener('click', (e) => {
+            e.preventDefault();
+            updateStep(6); // Jump to Result step
         });
 
         prevBtn.addEventListener('click', () => {

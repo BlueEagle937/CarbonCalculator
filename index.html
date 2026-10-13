@@ -62,17 +62,20 @@
             <p class="text-secondary">Every small change makes a big difference for our planet.</p>
         </div>
 
-        <!-- Navigation Tabs -->
+        <!-- Navigation Tabs & Home Button -->
         <div class="container mb-3">
-            <ul class="nav nav-tabs justify-content-center" id="calcTabs">
-                <li class="nav-item"><a class="nav-link active" href="#" data-step="0">General</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="1">Home</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="2">Travel</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="3">Food</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="4">Electronic usage</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="5">Shopping</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="6">Result</a></li>
-            </ul>
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <ul class="nav nav-tabs mb-0" id="calcTabs">
+                    <li class="nav-item"><a class="nav-link active" href="#" data-step="0">General</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="1">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="2">Travel</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="3">Food</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="4">Electronic usage</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="5">Shopping</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="6">Result</a></li>
+                </ul>
+                <a href="#" class="btn btn-success btn-sm px-4" id="homeBtn">Home</a>
+            </div>
         </div>
 
         <!-- Calculator Card Form -->
@@ -191,6 +194,7 @@
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const calculateAction = document.getElementById('calculateAction');
+        const homeBtn = document.getElementById('homeBtn');
         const headerTitle = document.getElementById('cardHeaderTitle');
         const stepTitles = ["General", "Home", "Travel", "Food", "Electronic usage", "Shopping", "Result"];
         
@@ -246,7 +250,6 @@
             headerTitle.textContent = `Fill the form below${stepIndex > 0 ? ' - ' + stepTitles[stepIndex] : ''}`;
             prevBtn.disabled = (stepIndex === 0);
 
-            // Toggle Next vs Calculate button based on step
             if (stepIndex === 5) { // Shopping step
                 nextBtn.style.display = 'none';
                 calculateAction.style.display = 'inline-block';
@@ -276,6 +279,11 @@
             if (currentStep > 0) {
                 updateStep(currentStep - 1);
             }
+        });
+
+        homeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            updateStep(0); // Jump back to General tab
         });
 
         navLinks.forEach((link, idx) => {

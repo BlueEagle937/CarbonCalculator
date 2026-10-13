@@ -42,7 +42,7 @@
         
         <!-- Requirement 1 & 2: Main Heading & Subheading -->
         <div class="text-center mb-4">
-            <h1 class="display-5 fw-bold text-dark border d-inline-block px-4 py-2 bg-white shadow-sm">Carbon Footprint Calculator</h1>
+            <h1 class="display-5 fw-bold text-dark border d-inline-block px-4 py-2 bg-white shadow-sm">Carbon Footprint Calculator</h1>[cite: 2]
             <h2 class="text-muted mt-2 fs-4">Climate change is real!!</h2>[cite: 2]
         </div>
 
@@ -252,7 +252,7 @@
                     updateStep(6); // Go to Result
                 });
             } else if (stepIndex === 6) {
-                actionContainer.innerHTML = ''; // Hide buttons on result page if desired, or keep prev
+                actionContainer.innerHTML = ''; 
             } else {
                 actionContainer.innerHTML = `<button type="button" class="btn btn-success btn-sm px-4" id="nextBtn">Next</button>`;
                 document.getElementById('nextBtn').addEventListener('click', () => {
@@ -265,10 +265,12 @@
             currentStep = stepIndex;
         }
 
-        // Initial Next button listener
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            if (currentStep < steps.length - 1) {
-                updateStep(currentStep + 1);
+        // Event delegation or direct binding for initial Next button
+        actionContainer.addEventListener('click', (e) => {
+            if (e.target && e.target.id === 'nextBtn') {
+                if (currentStep < steps.length - 1) {
+                    updateStep(currentStep + 1);
+                }
             }
         });
 

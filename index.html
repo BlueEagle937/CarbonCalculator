@@ -169,4 +169,77 @@
             let electricity = parseFloat(document.getElementById('electricityInput').value) || 0;
             let household = parseFloat(document.getElementById('householdInput').value) || 1;
             let driving = parseFloat(document.getElementById('drivingInput').value) || 0;
-            let transit = parseFloat(document.getElementById('transit
+            let transit = parseFloat(document.getElementById('transitInput').value) || 0;
+            let dietFactor = parseFloat(document.getElementById('dietInput').value) || 2.0;
+            let electronics = parseFloat(document.getElementById('electronicsInput').value) || 0;
+            let shopping = parseFloat(document.getElementById('shoppingInput').value) || 0;
+
+            let homeEmissions = (electricity * 12 * 0.0005) / household;
+            let travelEmissions = (driving * 52 * 0.0002) + (transit * 52 * 0.01);
+            let foodEmissions = dietFactor;
+            let electronicEmissions = electronics * 365 * 0.0001;
+            let shoppingEmissions = shopping * 12 * 0.05;
+
+            let totalTons = homeEmissions + travelEmissions + foodEmissions + electronicEmissions + shoppingEmissions;
+            totalTons = Math.round(totalTons * 10) / 10;
+
+            document.getElementById('resultDisplay').textContent = `${totalTons} Tons CO2 / Year`;
+            
+            let feedback = "";
+            if (totalTons < 4) {
+                feedback = "Great job! Your footprint is lower than the global average.";
+            } else if (totalTons < 8) {
+                feedback = "Moderate footprint. Consider reducing energy or travel emissions.";
+            } else {
+                feedback = "Your footprint is quite high. Try exploring more sustainable daily habits!";
+            }
+            document.getElementById('resultFeedback').textContent = feedback;
+        }
+
+        function updateStep(stepIndex) {
+            if (stepIndex === steps.length - 1) {
+                calculateCarbonFootprint();
+            }
+
+            steps.forEach((step, idx) => {
+                step.classList.toggle('active-step', idx === stepIndex);
+            });
+            navLinks.forEach((link, idx) => {
+                link.classList.toggle('active', idx === stepIndex);
+                if(idx === stepIndex) {
+                    link.classList.remove('text-dark');
+                    link.classList.add('bg-light', 'border');
+                } else {
+                    link.classList.add('text-dark');
+                    link.classList.remove('bg-light', 'border');
+                }
+            });
+            headerTitle.textContent = `Fill the form below${stepIndex > 0 ? ' - ' + stepTitles[stepIndex] : ''}`;
+            prevBtn.disabled = (stepIndex === 0);
+            nextBtn.textContent = (stepIndex === steps.length - 1) ? 'Finish' : 'Next';
+            currentStep = stepIndex;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                updateStep(currentStep + 1);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 0) {
+                updateStep(currentStep - 1);
+            }
+        });
+
+        navLinks.forEach((link, idx) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                updateStep(idx);
+            });
+        });
+        
+        updateStep(0);
+    </script>
+</body>
+</html>

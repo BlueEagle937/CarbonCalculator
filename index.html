@@ -25,12 +25,12 @@
 <body>
 
     <div class="container py-4">
-        <!-- 1. Main Heading Box -->
+        <!-- Main Heading Box -->
         <div class="text-center mb-4">
             <h1 class="display-6 fw-bold text-dark border d-inline-block px-4 py-2 bg-white shadow-sm">Carbon Footprint Calculator</h1>
         </div>
 
-        <!-- 2. Navigation Bar with Tabs & Home Button -->
+        <!-- Navigation Bar with Tabs & Home Button -->
         <div class="card mb-4 shadow-sm">
             <div class="card-body py-2">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
@@ -38,22 +38,22 @@
                         <li class="nav-item"><a class="nav-link active bg-light text-dark border" href="#" data-step="0">General</a></li>
                         <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="1">Home</a></li>
                         <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="2">Travel</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="3">Food</a></li>[cite: 1]
-                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="4">Electronic usage</a></li>[cite: 1]
-                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="5">Shopping</a></li>[cite: 1]
-                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="6">Result</a></li>[cite: 1]
+                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="3">Food</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="4">Electronic usage</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="5">Shopping</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="6">Result</a></li>
                     </ul>
-                    <a href="#" class="btn btn-success btn-sm px-4">Home</a>[cite: 1]
+                    <a href="#" class="btn btn-success btn-sm px-4">Home</a>
                 </div>
             </div>
         </div>
 
-        <!-- 3. Calculator Card Form -->
+        <!-- Calculator Card Form -->
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="card shadow-sm border">
                     <div class="card-header custom-card-header text-center fw-bold" id="cardHeaderTitle">
-                        Fill the form below[cite: 1]
+                        Fill the form below
                     </div>
                     <div class="card-body">
                         <form id="footprintForm">
@@ -61,17 +61,17 @@
                             <div class="form-step active-step">
                                 <div class="mb-3 row align-items-center">
                                     <label class="col-sm-3 col-form-label fw-semibold">Name</label>
-                                    <div class="col-sm-9"><input type="text" class="form-control" id="userName"></div>
+                                    <div class="col-sm-9"><input type="text" class="form-control" id="userName" placeholder="Enter your name"></div>
                                 </div>
                                 <div class="mb-3 row align-items-center">
                                     <label class="col-sm-3 col-form-label fw-semibold">Age</label>
-                                    <div class="col-sm-9"><input type="number" class="form-control" id="userAge"></div>
+                                    <div class="col-sm-9"><input type="number" class="form-control" id="userAge" placeholder="Enter your age"></div>
                                 </div>
                                 <div class="mb-3 row align-items-center">
                                     <label class="col-sm-3 col-form-label fw-semibold">Country</label>
                                     <div class="col-sm-9">
                                         <select class="form-select" id="userCountry">
-                                            <option selected>Saudi Arabia</option>[cite: 1]
+                                            <option selected>Saudi Arabia</option>
                                             <option>United Arab Emirates</option>
                                             <option>Qatar</option>
                                             <option>United States</option>
@@ -143,10 +143,10 @@
                             </div>
                         </form>
                     </div>
-                    <!-- 4. Card Footer with Prev and Next buttons -->
+                    <!-- Card Footer with Prev and Next buttons -->
                     <div class="card-footer bg-light d-flex justify-content-between py-3">
-                        <button type="button" class="btn btn-secondary btn-sm px-4" id="prevBtn">Prev</button>[cite: 1]
-                        <button type="button" class="btn btn-success btn-sm px-4" id="nextBtn">Next</button>[cite: 1]
+                        <button type="button" class="btn btn-secondary btn-sm px-4" id="prevBtn">Prev</button>
+                        <button type="button" class="btn btn-success btn-sm px-4" id="nextBtn">Next</button>
                     </div>
                 </div>
             </div>
@@ -169,77 +169,4 @@
             let electricity = parseFloat(document.getElementById('electricityInput').value) || 0;
             let household = parseFloat(document.getElementById('householdInput').value) || 1;
             let driving = parseFloat(document.getElementById('drivingInput').value) || 0;
-            let transit = parseFloat(document.getElementById('transitInput').value) || 0;
-            let dietFactor = parseFloat(document.getElementById('dietInput').value) || 2.0;
-            let electronics = parseFloat(document.getElementById('electronicsInput').value) || 0;
-            let shopping = parseFloat(document.getElementById('shoppingInput').value) || 0;
-
-            let homeEmissions = (electricity * 12 * 0.0005) / household;
-            let travelEmissions = (driving * 52 * 0.0002) + (transit * 52 * 0.01);
-            let foodEmissions = dietFactor;
-            let electronicEmissions = electronics * 365 * 0.0001;
-            let shoppingEmissions = shopping * 12 * 0.05;
-
-            let totalTons = homeEmissions + travelEmissions + foodEmissions + electronicEmissions + shoppingEmissions;
-            totalTons = Math.round(totalTons * 10) / 10;
-
-            document.getElementById('resultDisplay').textContent = `${totalTons} Tons CO2 / Year`;
-            
-            let feedback = "";
-            if (totalTons < 4) {
-                feedback = "Great job! Your footprint is lower than the global average.";
-            } else if (totalTons < 8) {
-                feedback = "Moderate footprint. Consider reducing energy or travel emissions.";
-            } else {
-                feedback = "Your footprint is quite high. Try exploring more sustainable daily habits!";
-            }
-            document.getElementById('resultFeedback').textContent = feedback;
-        }
-
-        function updateStep(stepIndex) {
-            if (stepIndex === steps.length - 1) {
-                calculateCarbonFootprint();
-            }
-
-            steps.forEach((step, idx) => {
-                step.classList.toggle('active-step', idx === stepIndex);
-            });
-            navLinks.forEach((link, idx) => {
-                link.classList.toggle('active', idx === stepIndex);
-                if(idx === stepIndex) {
-                    link.classList.remove('text-dark');
-                    link.classList.add('bg-light', 'border');
-                } else {
-                    link.classList.add('text-dark');
-                    link.classList.remove('bg-light', 'border');
-                }
-            });
-            headerTitle.textContent = `Fill the form below${stepIndex > 0 ? ' - ' + stepTitles[stepIndex] : ''}`;
-            prevBtn.disabled = (stepIndex === 0);
-            nextBtn.textContent = (stepIndex === steps.length - 1) ? 'Finish' : 'Next';
-            currentStep = stepIndex;
-        }
-
-        nextBtn.addEventListener('click', () => {
-            if (currentStep < steps.length - 1) {
-                updateStep(currentStep + 1);
-            }
-        });
-
-        prevBtn.addEventListener('click', () => {
-            if (currentStep > 0) {
-                updateStep(currentStep - 1);
-            }
-        });
-
-        navLinks.forEach((link, idx) => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                updateStep(idx);
-            });
-        });
-        
-        updateStep(0);
-    </script>
-</body>
-</html>
+            let transit = parseFloat(document.getElementById('transit

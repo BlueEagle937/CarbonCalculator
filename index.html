@@ -14,6 +14,19 @@
             background-color: #198754;
             color: white;
         }
+        .calculate-btn {
+            background-color: #0d6efd;
+            color: white;
+            text-decoration: none;
+            padding: 6px 20px;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            display: inline-block;
+        }
+        .calculate-btn:hover {
+            background-color: #0b5ed7;
+            color: white;
+        }
         .form-step {
             display: none;
         }
@@ -24,34 +37,48 @@
 </head>
 <body>
 
-    <div class="container py-4">
-        <!-- Main Heading Box -->
+    <!-- Requirement 8: container-fluid layout -->
+    <div class="container-fluid py-4 px-4">
+        
+        <!-- Requirement 1 & 2: Main Heading & Subheading -->
         <div class="text-center mb-4">
-            <h1 class="display-6 fw-bold text-dark border d-inline-block px-4 py-2 bg-white shadow-sm">Carbon Footprint Calculator</h1>
+            <h1 class="display-5 fw-bold text-dark border d-inline-block px-4 py-2 bg-white shadow-sm">Carbon Footprint Calculator</h1>
+            <h2 class="text-muted mt-2 fs-4">Climate change is real!!</h2>[cite: 2]
         </div>
 
-        <!-- Navigation Bar with Tabs & Home Button -->
-        <div class="card mb-4 shadow-sm">
-            <div class="card-body py-2">
-                <div class="d-flex justify-content-between align-items-center flex-wrap">
-                    <ul class="nav nav-pills mb-0" id="calcTabs">
-                        <li class="nav-item"><a class="nav-link active bg-light text-dark border" href="#" data-step="0">General</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="1">Home</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="2">Travel</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="3">Food</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="4">Electronic usage</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="5">Shopping</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="6">Result</a></li>
-                    </ul>
-                    <a href="#" class="btn btn-success btn-sm px-4" id="homeBtn">Home</a>
-                </div>
+        <!-- Requirement 3 & 4: Introduction Paragraph & Image -->
+        <div class="row align-items-center mb-5 px-md-5">
+            <div class="col-md-6">
+                <p class="lead">Understanding your environmental impact is the first step toward building a sustainable future. Use our multi-step carbon calculator to track your daily energy consumption, travel habits, food choices, and shopping footprint to see how you can reduce emissions.</p>[cite: 2]
             </div>
+            <div class="col-md-6 text-center">
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80" alt="Environmental Sustainability" class="img-fluid rounded shadow" style="max-height: 250px;">[cite: 2]
+            </div>
+        </div>
+
+        <!-- Requirement 5 & 6: Secondary Heading & Supporting Paragraph -->
+        <div class="text-center mb-4">
+            <h4>Ready to assess your carbon footprint? Fill out the form below to get started.</h4>[cite: 2]
+            <p class="text-secondary">Every small change makes a big difference for our planet.</p>[cite: 2]
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="container mb-3">
+            <ul class="nav nav-tabs justify-content-center" id="calcTabs">
+                <li class="nav-item"><a class="nav-link active" href="#" data-step="0">General</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="1">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="2">Travel</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="3">Food</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="4">Electronic usage</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="5">Shopping</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="6">Result</a></li>
+            </ul>
         </div>
 
         <!-- Calculator Card Form -->
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card shadow-sm border">
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-success">
                     <div class="card-header custom-card-header text-center fw-bold" id="cardHeaderTitle">
                         Fill the form below
                     </div>
@@ -143,10 +170,12 @@
                             </div>
                         </form>
                     </div>
-                    <!-- Card Footer with Prev and Next buttons -->
-                    <div class="card-footer bg-light d-flex justify-content-between py-3">
+                    <!-- Card Footer with Dynamic Navigation & Requirement 7 Calculate Hyperlink Button -->
+                    <div class="card-footer bg-light d-flex justify-content-between py-3 align-items-center">
                         <button type="button" class="btn btn-secondary btn-sm px-4" id="prevBtn">Prev</button>
-                        <button type="button" class="btn btn-success btn-sm px-4" id="nextBtn">Next</button>
+                        <div id="actionButtonContainer">
+                            <button type="button" class="btn btn-success btn-sm px-4" id="nextBtn">Next</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -159,8 +188,7 @@
         const steps = document.querySelectorAll('.form-step');
         const navLinks = document.querySelectorAll('#calcTabs .nav-link');
         const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const homeBtn = document.getElementById('homeBtn');
+        const actionContainer = document.getElementById('actionButtonContainer');
         const headerTitle = document.getElementById('cardHeaderTitle');
         const stepTitles = ["General", "Home", "Travel", "Food", "Electronic usage", "Shopping", "Result"];
         
@@ -188,7 +216,7 @@
             
             let feedback = "";
             if (totalTons < 4) {
-                feedback = "Great job! Your footprint is lower than the global average.";
+                feedback = "Great job! Your footprint is lower than general averages.";
             } else if (totalTons < 8) {
                 feedback = "Moderate footprint. Consider reducing energy or travel emissions.";
             } else {
@@ -209,19 +237,36 @@
                 link.classList.toggle('active', idx === stepIndex);
                 if(idx === stepIndex) {
                     link.classList.remove('text-dark');
-                    link.classList.add('bg-light', 'border');
                 } else {
                     link.classList.add('text-dark');
-                    link.classList.remove('bg-light', 'border');
                 }
             });
             headerTitle.textContent = `Fill the form below${stepIndex > 0 ? ' - ' + stepTitles[stepIndex] : ''}`;
             prevBtn.disabled = (stepIndex === 0);
-            nextBtn.textContent = (stepIndex === steps.length - 1) ? 'Finish' : 'Next';
+
+            // Requirement 7: On Shopping step (index 5), show blue Calculate hyperlink button instead of Next
+            if (stepIndex === 5) {
+                actionContainer.innerHTML = `<a href="#" class="calculate-btn" id="calculateAction">Calculate</a>`;[cite: 2]
+                document.getElementById('calculateAction').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    updateStep(6); // Go to Result
+                });
+            } else if (stepIndex === 6) {
+                actionContainer.innerHTML = ''; // Hide buttons on result page if desired, or keep prev
+            } else {
+                actionContainer.innerHTML = `<button type="button" class="btn btn-success btn-sm px-4" id="nextBtn">Next</button>`;
+                document.getElementById('nextBtn').addEventListener('click', () => {
+                    if (currentStep < steps.length - 1) {
+                        updateStep(currentStep + 1);
+                    }
+                });
+            }
+
             currentStep = stepIndex;
         }
 
-        nextBtn.addEventListener('click', () => {
+        // Initial Next button listener
+        document.getElementById('nextBtn').addEventListener('click', () => {
             if (currentStep < steps.length - 1) {
                 updateStep(currentStep + 1);
             }
@@ -231,11 +276,6 @@
             if (currentStep > 0) {
                 updateStep(currentStep - 1);
             }
-        });
-
-        homeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            updateStep(0); // Jump back to General tab
         });
 
         navLinks.forEach((link, idx) => {

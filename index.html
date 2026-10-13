@@ -14,18 +14,6 @@
             background-color: #198754;
             color: white;
         }
-        .calculate-btn {
-            background-color: #0d6efd;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            display: inline-block;
-        }
-        .calculate-btn:hover {
-            background-color: #0b5ed7;
-            color: white;
-        }
         .form-step {
             display: none;
         }
@@ -36,48 +24,36 @@
 </head>
 <body>
 
-    <div class="container-fluid py-4">
-        <!-- Main Heading & Subheading -->
+    <div class="container py-4">
+        <!-- 1. Main Heading Box -->
         <div class="text-center mb-4">
-            <h1 class="display-5 fw-bold text-dark border d-inline-block px-4 py-2 bg-white shadow-sm">Carbon Footprint Calculator</h1>
-            <h2 class="text-muted mt-2 fs-4">Climate change is real!!!</h2>
+            <h1 class="display-6 fw-bold text-dark border d-inline-block px-4 py-2 bg-white shadow-sm">Carbon Footprint Calculator</h1>
         </div>
 
-        <!-- Introduction Paragraph & Image Section -->
-        <div class="row align-items-center mb-5 px-4">
-            <div class="col-md-6">
-                <p class="lead">Understanding your environmental impact is the first step toward building a sustainable future. Use our multi-step carbon calculator to track your daily energy consumption, travel habits, food choices, and shopping footprint to see how you can reduce emissions.</p>
+        <!-- 2. Navigation Bar with Tabs & Home Button -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body py-2">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <ul class="nav nav-pills mb-0" id="calcTabs">
+                        <li class="nav-item"><a class="nav-link active bg-light text-dark border" href="#" data-step="0">General</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="1">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="2">Travel</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="3">Food</a></li>[cite: 1]
+                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="4">Electronic usage</a></li>[cite: 1]
+                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="5">Shopping</a></li>[cite: 1]
+                        <li class="nav-item"><a class="nav-link text-dark px-3" href="#" data-step="6">Result</a></li>[cite: 1]
+                    </ul>
+                    <a href="#" class="btn btn-success btn-sm px-4">Home</a>[cite: 1]
+                </div>
             </div>
-            <div class="col-md-6 text-center">
-                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80" alt="Environmental Sustainability" class="img-fluid rounded shadow" style="max-height: 250px;">
-            </div>
         </div>
 
-        <!-- Secondary Heading & Supporting Paragraph -->
-        <div class="text-center mb-4">
-            <h4>Ready to assess your carbon footprint? Fill out the form below to get started.</h4>
-            <p class="text-secondary">Every small change makes a big difference for our planet.</p>
-        </div>
-
-        <!-- Navigation Tabs -->
-        <div class="container mb-3">
-            <ul class="nav nav-tabs justify-content-center" id="calcTabs">
-                <li class="nav-item"><a class="nav-link active" href="#" data-step="0">General</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="1">Home</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="2">Travel</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="3">Food</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="4">Electronic usage</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="5">Shopping</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="#" data-step="6">Result</a></li>
-            </ul>
-        </div>
-
-        <!-- Calculator Card Form -->
+        <!-- 3. Calculator Card Form -->
         <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="card shadow-sm border-success">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border">
                     <div class="card-header custom-card-header text-center fw-bold" id="cardHeaderTitle">
-                        Fill the form below - General
+                        Fill the form below[cite: 1]
                     </div>
                     <div class="card-body">
                         <form id="footprintForm">
@@ -85,17 +61,17 @@
                             <div class="form-step active-step">
                                 <div class="mb-3 row align-items-center">
                                     <label class="col-sm-3 col-form-label fw-semibold">Name</label>
-                                    <div class="col-sm-9"><input type="text" class="form-control" id="userName" placeholder="Enter your name"></div>
+                                    <div class="col-sm-9"><input type="text" class="form-control" id="userName"></div>
                                 </div>
                                 <div class="mb-3 row align-items-center">
                                     <label class="col-sm-3 col-form-label fw-semibold">Age</label>
-                                    <div class="col-sm-9"><input type="number" class="form-control" id="userAge" placeholder="Enter your age"></div>
+                                    <div class="col-sm-9"><input type="number" class="form-control" id="userAge"></div>
                                 </div>
                                 <div class="mb-3 row align-items-center">
                                     <label class="col-sm-3 col-form-label fw-semibold">Country</label>
                                     <div class="col-sm-9">
                                         <select class="form-select" id="userCountry">
-                                            <option selected>Saudi Arabia</option>
+                                            <option selected>Saudi Arabia</option>[cite: 1]
                                             <option>United Arab Emirates</option>
                                             <option>Qatar</option>
                                             <option>United States</option>
@@ -167,18 +143,13 @@
                             </div>
                         </form>
                     </div>
-                    <!-- Card Footer with Prev and Next buttons -->
+                    <!-- 4. Card Footer with Prev and Next buttons -->
                     <div class="card-footer bg-light d-flex justify-content-between py-3">
-                        <button type="button" class="btn btn-secondary btn-sm px-4" id="prevBtn">Prev</button>
-                        <button type="button" class="btn btn-success btn-sm px-4" id="nextBtn">Next</button>
+                        <button type="button" class="btn btn-secondary btn-sm px-4" id="prevBtn">Prev</button>[cite: 1]
+                        <button type="button" class="btn btn-success btn-sm px-4" id="nextBtn">Next</button>[cite: 1]
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Calculate Hyperlink Button (Only visible on the last page) -->
-        <div class="text-center mt-5" id="calculateContainer" style="display: none;">
-            <a href="#" class="calculate-btn" id="calculateAction">Calculate</a>
         </div>
     </div>
 
@@ -190,7 +161,6 @@
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const headerTitle = document.getElementById('cardHeaderTitle');
-        const calculateContainer = document.getElementById('calculateContainer');
         const stepTitles = ["General", "Home", "Travel", "Food", "Electronic usage", "Shopping", "Result"];
         
         let currentStep = 0;
@@ -229,9 +199,6 @@
         function updateStep(stepIndex) {
             if (stepIndex === steps.length - 1) {
                 calculateCarbonFootprint();
-                calculateContainer.style.display = 'block'; // Show calculate button only on the last page
-            } else {
-                calculateContainer.style.display = 'none'; // Hide calculate button on all other pages
             }
 
             steps.forEach((step, idx) => {
@@ -241,11 +208,13 @@
                 link.classList.toggle('active', idx === stepIndex);
                 if(idx === stepIndex) {
                     link.classList.remove('text-dark');
+                    link.classList.add('bg-light', 'border');
                 } else {
                     link.classList.add('text-dark');
+                    link.classList.remove('bg-light', 'border');
                 }
             });
-            headerTitle.textContent = `Fill the form below - ${stepTitles[stepIndex]}`;
+            headerTitle.textContent = `Fill the form below${stepIndex > 0 ? ' - ' + stepTitles[stepIndex] : ''}`;
             prevBtn.disabled = (stepIndex === 0);
             nextBtn.textContent = (stepIndex === steps.length - 1) ? 'Finish' : 'Next';
             currentStep = stepIndex;
@@ -268,11 +237,6 @@
                 e.preventDefault();
                 updateStep(idx);
             });
-        });
-
-        document.getElementById('calculateAction').addEventListener('click', (e) => {
-            e.preventDefault();
-            updateStep(steps.length - 1);
         });
         
         updateStep(0);
